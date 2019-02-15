@@ -12,9 +12,7 @@
             height: auto;
         }
 
-        a {
-            display: none;
-        }
+
 
         .pagesBtn {
             margin: 10px;
@@ -71,54 +69,64 @@
     <script>
 
         var imagePerPage = 12;
-        var page = document.querySelectorAll(".page");
+        var page = document.querySelector(".page");
         var images = document.querySelectorAll("a");
         var imageColection = document.querySelector("#imageColection");
-     
         var pages = Math.ceil(images.length / imagePerPage);
-        var currentpages = pages;
+        var totalImg = images.length;
 
-        for (let i = 0; i < images.length; i++)
-            images[i].style.display = "none";
+        var img = {
+            imgSrc: "",
+            wikiSrc: ""
+        }
+
+        var allImg = [];
+        for (let i = 0; i < images.length; i++) {
+            img.imgSrc = images[i].children[0].src;
+            img.wikiSrc = images[i].href;
+            allImg.push(img);
+        }
+
+
 
         function displayImage() {
 
             for (let i = (pages - 1) * imagePerPage; i < images.length; i++)
                 images[i].style.display = "initial";
-                
+
         }
 
         displayImage();
 
         function addImage() {
-           
+
             var imgSrc = document.querySelector("#imgSrc").value;
             var wikiSrc = document.querySelector("#wikiSrc").value;
 
-            if (currentpages === pages) {
-               imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
-               images = document.querySelectorAll("a");
-               pages = Math.ceil(images.length / imagePerPage);
-               images[(images.length-1)].style.display ="initial";
+            if (!(totalImg % imagePerPage)) {
+
+                imageColection.innerHTML = "";
+                page.innerHTML += `<button class="pagesBtn"> ${pages}</button>`
+                imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
+
+                images = document.querySelectorAll("a");
+
+                img.imgSrc = images[images.length - 1].children[0].src;
+                img.wikiSrc = images[images.length - 1].href;
+                allImg.push(img);
+                pages++;
+                totalImg++;
             }
 
             else {
-                for (let i = 0; i < images.length; i++)
-                    images[i].style.display = "none";
-
-                page[0].innerHTML = `<button class="pagesBtn"> 
-            <span class="start">${(pages - 1) * imagePerPage + 1}-</span>
-            <span class ="end">${imagePerPage * pages - 1}</span>
-            </button>`
-
-            imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
-            images[(images.length-1)].style.display ="initial";
-            //displayImage();
-
-            currentpages = pages;
-
+                imageColection.innerHTML += `<a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
+                images = document.querySelectorAll("a");
+                img.imgSrc = images[images.length - 1].children[0].src;
+                img.wikiSrc = images[images.length - 1].href;
+                allImg.push(img);
+                totalImg++;
+            }
         }
-    }
 
     </script>
 </body>
