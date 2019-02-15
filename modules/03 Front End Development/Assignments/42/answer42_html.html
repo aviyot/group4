@@ -6,23 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    form {
+        margin: 10px;
+        padding: 10px;
+        display: inline-block;
+        background-color: aquamarine;
+    }
+
+    input,select {
+        margin: 5px;
+        padding: 5px;
+        font-size: 20px;
+    }
+    </style>
 </head>
 
-<form action="" onsubmit="return false">
-    <input type="text" id="title" placeholder="title"><br />
-    <input type="text" id ="seconds" placeholder="seconds"><br />
-    <select id="user">
-        <option value="label">choice uploader</option>
-        <option value="user1">aviyot</option>
-    </select><br/>
-    <input type="submit" value="watch" onclick="showDetails()"><br />
-</form>
+<div id="allVideos">
+    <form action="" onsubmit="return false">
+        <input type="text" class = "title" placeholder="title"><br />
+        <input type="number" class = "seconds" placeholder="seconds"><br />
+        <select class = "user">
+            <option value = "label">choice uploader</option>
+            <option value = "user1">aviyot</option>
+            <option value = "labe2">yosi</option>
+            <option value = "user3">david</option>
+            <option value = "user3">beni</option>
+        </select><br />
+    </form>
+
+</div>
+
+<input type="button" value="Add Form" onclick="addForm()"> </br>
+<input type="button" value="Watch All" onclick="showDetails()"><br />
 <div id="msg"></div>
 
 <body>
     <script>
-
+        
+    
+        var allVideos = document.querySelector("#allVideos");
         var msg = document.querySelector("#msg");
+
         function Video(title, uploader, second) {
 
             //privte propeirts
@@ -35,7 +60,7 @@
 
                 try {
 
-                   
+
                     return `You watched all ${second} seconds of ${title}!`;
 
                 }
@@ -49,17 +74,37 @@
             }
         }
 
-        
 
-            function showDetails() {
-            var title = document.querySelector("#title").value;
-            var user = document.querySelector("#user").value;
-            var time = document.querySelector("#seconds").value;
 
-            var video = new Video(title, user, time);
-            console.log(video.watch());
-            msg.innerHTML = video.watch();
+        function showDetails() {
+            var title = document.querySelectorAll(".title");
+            var user = document.querySelectorAll(".user");
+            var time = document.querySelectorAll(".seconds");
+
+            for (var i = 0 ; i < title.length ; i++) {
+           
+            if (title[i].value && user[i].value && time[i].value){
+            var video = new Video(title[i].value, user[i].value, time[i].value);
+           console.log(video.watch());
+            msg.innerHTML += `${video.watch()} <br/>`;
             }
+            }
+        }
+
+        function addForm() {
+            allVideos.insertAdjacentHTML('beforeend',`
+              <form action="" onsubmit="return false">
+                <input type="text" class="title" placeholder="title"><br />
+                <input type="number" class ="seconds" placeholder="seconds"><br />
+                <select class="user">
+                   <option value="label">choice uploader</option>
+                   <option value="user1">aviyot</option>
+                   <option value = "labe2">yosi</option>
+                   <option value = "user3">david</option>
+                   <option value = "user3">beni</option>
+                </select><br/>
+              </form>`)
+        }
 
     </script>
 </body>
