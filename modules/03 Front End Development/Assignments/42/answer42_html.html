@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<form action="" onsubmit="return false">
+    <input type="text" id="title" placeholder="title"><br />
+    <input type="text" id ="seconds" placeholder="seconds"><br />
+    <select id="user">
+        <option value="label">choice uploader</option>
+        <option value="user1">aviyot</option>
+    </select><br/>
+    <input type="submit" value="watch" onclick="showDetails()"><br />
+</form>
+<div id="msg"></div>
+
+<body>
+    <script>
+
+        var msg = document.querySelector("#msg");
+        function Video(title, uploader, second) {
+
+            //privte propeirts
+            title = title;
+            uploader = uploader;
+            second = second;
+
+            //global function
+            this.watch = function () {
+
+                try {
+
+                   
+                    return `You watched all ${second} seconds of ${title}!`;
+
+                }
+                catch (err) {
+                    return "Oops... An error occured";
+                }
+
+                finally {
+
+                }
+            }
+        }
+
+        
+
+            function showDetails() {
+            var title = document.querySelector("#title").value;
+            var user = document.querySelector("#user").value;
+            var time = document.querySelector("#seconds").value;
+
+            var video = new Video(title, user, time);
+            console.log(video.watch());
+            msg.innerHTML = video.watch();
+            }
+
+    </script>
+</body>
+
+</html>
