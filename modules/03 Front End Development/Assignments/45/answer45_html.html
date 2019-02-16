@@ -68,6 +68,8 @@
 
     <script>
 
+
+        var displaied = false;
         var imagePerPage = 12;
         var page = document.querySelector(".page");
         var images = document.querySelectorAll("a");
@@ -80,33 +82,27 @@
             wikiSrc: ""
         }
 
+
         var allImg = [];
         for (let i = 0; i < images.length; i++) {
-            img.imgSrc = images[i].children[0].src;
+            img.imgSrc =  images[i].children[0].src;
             img.wikiSrc = images[i].href;
             allImg.push(img);
         }
 
-
-
-        function displayImage() {
-
-            for (let i = (pages - 1) * imagePerPage; i < images.length; i++)
-                images[i].style.display = "initial";
-
-        }
-
-        displayImage();
-
         function addImage() {
-
+            
+            if (displaied) {
+                imageColection.innerHTML = "";
+                displaied = false;
+            }
             var imgSrc = document.querySelector("#imgSrc").value;
             var wikiSrc = document.querySelector("#wikiSrc").value;
 
             if (!(totalImg % imagePerPage)) {
 
                 imageColection.innerHTML = "";
-                page.innerHTML += `<button class="pagesBtn"> ${pages}</button>`
+                page.innerHTML += `<button class="pagesBtn" onclick = "displayPage(event)"> ${pages}</button>`
                 imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
 
                 images = document.querySelectorAll("a");
@@ -114,8 +110,10 @@
                 img.imgSrc = images[images.length - 1].children[0].src;
                 img.wikiSrc = images[images.length - 1].href;
                 allImg.push(img);
+
                 pages++;
                 totalImg++;
+            
             }
 
             else {
@@ -126,7 +124,22 @@
                 allImg.push(img);
                 totalImg++;
             }
+        
         }
+
+        function displayPage(e){
+        
+         var start = Number(e.currentTarget.innerHTML);
+          imageColection.innerHTML = "";
+          console.log(allImg);
+          for( var i = (start-1)*(imagePerPage-1) ; i < imagePerPage; i++) {
+            imageColection.innerHTML += `<a href="${ allImg[i].wikiSrc}"><img src="${allImg[i].imgSrc}" ></a>`
+          }
+
+        displaied = true;
+
+        }
+       
 
     </script>
 </body>
