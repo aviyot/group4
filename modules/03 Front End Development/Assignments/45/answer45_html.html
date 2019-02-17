@@ -10,9 +10,12 @@
         img {
             max-width: 30%;
             height: auto;
+            padding: 5px;
         }
 
-
+        input {
+            margin: 5px;
+        }
 
         .pagesBtn {
             margin: 10px;
@@ -21,12 +24,14 @@
 </head>
 
 <body>
+
     <h2>Add Images</h2>
     <label for="imgSrc">Enter Image Source :</label>
-    <input type="text" id="imgSrc"><br />
+    <input type="text" id="imgSrc" required><br />
     <label for="wikiSrc">Enter wikipedia link</label>
     <input type="text" id="wikiSrc"><br />
     <button id="addImage" onclick="addImage()">Add Image</button><br />
+    <div class="page"> </div> <br />
 
     <div class="image-bulk " id="imageColection">
         <a href="https://he.wikipedia.org/wiki/%D7%99%D7%9D_%D7%94%D7%9E%D7%9C%D7%97">
@@ -62,9 +67,6 @@
             <img src="https://cdn.pixabay.com/photo/2016/09/18/22/43/aircraft-1679200_960_720.jpg" alt="אל על">
         </a>
     </div>
-    <div class="page">
-
-    </div>
 
     <script>
 
@@ -77,69 +79,76 @@
         var pages = Math.ceil(images.length / imagePerPage);
         var totalImg = images.length;
 
-        var img = {
-            imgSrc: "",
-            wikiSrc: ""
-        }
 
+        var imgSrc;
+        var wikiSrc;
+        var allImg = new Array();
 
-        var allImg = [];
         for (let i = 0; i < images.length; i++) {
-            img.imgSrc =  images[i].children[0].src;
-            img.wikiSrc = images[i].href;
-            allImg.push(img);
+            imgSrc = images[i].children[0].src;
+            wikiSrc = images[i].href;
+            allImg[i] = { imgSrc, wikiSrc }
         }
+
+
 
         function addImage() {
-            
-            if (displaied) {
-                imageColection.innerHTML = "";
-                displaied = false;
-            }
+
             var imgSrc = document.querySelector("#imgSrc").value;
             var wikiSrc = document.querySelector("#wikiSrc").value;
 
-            if (!(totalImg % imagePerPage)) {
-
+            if (displaied) {
                 imageColection.innerHTML = "";
-                page.innerHTML += `<button class="pagesBtn" onclick = "displayPage(event)"> ${pages}</button>`
-                imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
+                for (var i = (pages - 1) * imagePerPage; i < allImg.length; i++) {
+                    imageColection.innerHTML += `<a href="${allImg[i].wikiSrc}"><img src="${allImg[i].imgSrc}" ></a>`
+                    displaied = false;
 
-                images = document.querySelectorAll("a");
-
-                img.imgSrc = images[images.length - 1].children[0].src;
-                img.wikiSrc = images[images.length - 1].href;
-                allImg.push(img);
-
-                pages++;
-                totalImg++;
-            
+                }
             }
 
             else {
-                imageColection.innerHTML += `<a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
-                images = document.querySelectorAll("a");
-                img.imgSrc = images[images.length - 1].children[0].src;
-                img.wikiSrc = images[images.length - 1].href;
-                allImg.push(img);
-                totalImg++;
+                if (!(totalImg % imagePerPage)) {
+
+                    imageColection.innerHTML = "";
+                    page.innerHTML += `<button class="pagesBtn" onclick = "displayPage(event)"> ${pages}</button>`
+                    imageColection.innerHTML += ` <a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
+
+                    images = document.querySelectorAll("a");
+
+                    imgSrc = images[images.length - 1].children[0].src;
+                    wikiSrc = images[images.length - 1].href;
+                    allImg.push({ imgSrc, wikiSrc });
+
+                    pages++;
+                    totalImg++;
+
+                }
+
+                else {
+                    imageColection.innerHTML += `<a href="${wikiSrc}"><img src="${imgSrc}" ></a>`
+                    images = document.querySelectorAll("a");
+                    imgSrc = images[images.length - 1].children[0].src;
+                    wikiSrc = images[images.length - 1].href;
+                    allImg.push({ imgSrc, wikiSrc });
+                    totalImg++;
+                }
             }
-        
-        }
-
-        function displayPage(e){
-        
-         var start = Number(e.currentTarget.innerHTML);
-          imageColection.innerHTML = "";
-          console.log(allImg);
-          for( var i = (start-1)*(imagePerPage-1) ; i < imagePerPage; i++) {
-            imageColection.innerHTML += `<a href="${ allImg[i].wikiSrc}"><img src="${allImg[i].imgSrc}" ></a>`
-          }
-
-        displaied = true;
 
         }
-       
+
+        function displayPage(e) {
+
+            var start = Number(e.currentTarget.innerHTML);
+            imageColection.innerHTML = "";
+            console.log(allImg);
+            for (var i = (start - 1) * (imagePerPage); i < imagePerPage * start; i++) {
+                imageColection.innerHTML += `<a href="${allImg[i].wikiSrc}"><img src="${allImg[i].imgSrc}" ></a>`
+            }
+
+            displaied = true;
+
+        }
+
 
     </script>
 </body>
