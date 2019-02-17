@@ -5,31 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Our Research</title>
+    <style>
+    h1 {
+        width: 100%;
+        background-color: blue;
+        color:white;
+        text-align: center;
+    }
+
+    table {
+        width: 700px;
+        border: 1px solid black;
+
+
+    }
+
+    #sideMenu {
+        display: inline-block;
+        width: 100px;
+    }
+
+    #studentSubject{
+
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    
+   
+
+    </style>
 </head>
 <body>
     <div id = "mainApp">
-        <h1 > Our Research </h1>
+            <h1 > Our Research </h1>
+            <div id="sideMenu">
+                    <form action="" onsubmit="return false;">
+                        <label for="studentName">Student Name</label>
+                        <select name="studentName" id="studentName">
+                            <option value="avi">avi</option>
+                            <option value="moshiko">moshiko</option>
+                            
+                        </select> <br/>
+                        <label for="subject">Subject</label>
+                        <select name="subject" id="subject">
+                                <option value="display">display</option>
+                        </select>
+                        <input type="submit" id="addToRow" value="Add" onclick="addRow()">
+                    </form>
+                    
+                </div>
+        
         <div id ="studentSubject">
             <table id ="studentSubjectTable">
                 <tr>
                     <th>Student Name</th>
                     <th>Subject</th>
                 </tr>
+               
             </table>
+
+            <button id ="pick" onclick = "pick()">Pick One</button>
+      
         </div>
 
-        <div id="sideMenu">
-            <form action="">
-                <label for="studentName">Student Name</label>
-                <select name="studentName" id="studentName">
-                    <option value="studen1">avi</option>
-                </select>
-                <input type="submit" value="Add">
-            </form>
-
-        </div>
+        
         <div id ="bottom"> <a href="">Back to top</a></div>
 
     </div>
 </body>
+
+<script>
+
+var studentSubjectTable =  document.querySelector("#studentSubjectTable");
+var pickOne = document.querySelector("#pick");
+function addRow(){
+   var studentName = document.querySelector("#studentName");
+   var subject = document.querySelector("#subject");
+   studentSubjectTable.innerHTML += ` <tr>
+                    <th>${studentName.value}</th>
+                    <th>${subject.value}</th>
+                </tr>`
+}
+
+function pick(){
+    var studentsAndSubject = document.querySelectorAll("tr");
+    var randomStudent = Math.floor(Math.random()*studentsAndSubject.length);
+    console.log(studentsAndSubject[randomStudent].children[0].innerHTML);
+  
+}
+</script>
 </html>
