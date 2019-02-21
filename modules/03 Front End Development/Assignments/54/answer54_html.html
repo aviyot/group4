@@ -6,82 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic-Tac-Toe game</title>
+    <link rel="stylesheet" id="colorStyle" href="light.css">
+    <link rel="stylesheet" href="style.css">
     <style>
-       .row div {
 
-            text-align: center;
-            align-content: center;
-         
-           
- 
-        }
-        .row {
-            display: inline-block;
-        }
-
-         .btn {
-           width:100px;
-           height: 100px;
-           font-size: x-large;
-         }
-
-         .row input {
-            border-radius: 50%;
-            background-color: blue;
-            color:white;
-         }
-
-         #gameTable {
-             width: 40%;
-             height: 60%;
-             margin: auto;
-             //background-color: lightslategray;
-        
-             
-         }
-
-         #game {
-             width: 100%;
-             height: 100%;
-             margin: auto;
-            
-             text-align: center;
-             font-size: x-large;
-            
-         }
     </style>
 </head>
 
 <body>
-    <div id = "game">
-    <label for="">player X </label>
-    <input type="text" name="player1" id="player1" placeholder="Enter Name" value="AVI">
-    <label for="">player O </label>
-    <input type="text" name="player2" id="player2" placeholder="Enter Name" value="YOSI">
-    <br />
     <input type="button" id="startNewGame" value="Start New Game" onclick="startNewGame()">
-    <div id ="gameTable">
-        <div class ="row">
-            <div></div>
-            <div></div>
-            <div></div>
+
+    <div id="game">
+
+        <div id="theme">
+            <span id="light" onclick="changeToLight()"> Light Colors</span>
+            <span id="dark" onclick="changeToDark()"> Dark Colors</span>
         </div>
-        <div class ="row">
-            <div></div>
-            <div></div>
-            <div></div>
+
+        <div id="appName"> <h2 class="game-name"> TIC TAC GAME </h2> </div>
+
+        <div class="players">
+            <label for="">player X </label>
+            <input type="text" name="player1" id="player1" placeholder="Enter Name" value="AVI"> <br />
+            <label for="">player O </label>
+            <input type="text" name="player2" id="player2" placeholder="Enter Name" value="YOSI">
         </div>
-        <div class ="row">
-            <div></div>
-            <div></div>
-            <div></div>
+
+        <div id="gameTable">
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
+
+      <div id = "status">
+        <div id="displayTurn"> </div>
+        <div id="gameStatus"></div>
+      </div>
+
     </div>
-
-
-    Next Player: <div id="displayTurn"> </div>
-    Game Status : <div id="gameStatus"></div>
-</div>
 
     <script>
         var isMyTurn = true;
@@ -90,13 +64,20 @@
         var displayTurn = document.getElementById("displayTurn");
         var btns;
         var myButtons;
-       
+        var mark;
+
+
+
+        var palyerName1 = document.getElementsByName("player1")[0].value;
+        var palyerName2 = document.getElementsByName("player2")[0].value;
 
         function startNewGame() {
-             isMyTurn = true;
+
+            document.getElementById("game").style.display = "block";
+            isMyTurn = true;
             document.getElementById("startNewGame").disabled = true;
             document.getElementById("gameStatus").innerHTML = "";
-
+            document.getElementById("startNewGame").style.display = "none"
 
             gameCount = 0;
 
@@ -106,98 +87,113 @@
             }
 
             btns = document.querySelectorAll("#gameTable input[type = button]");
-           //var myButtons = document.getElementsByClassName("btn");
+            if (isMyTurn) {
+
+                displayTurn.innerHTML = `Next Player: <mark> ${palyerName1}</marK>`
+
+            }
         }
 
-       
-        var palyerName1 = document.getElementsByName("player1")[0].value;
-        var palyerName2 = document.getElementsByName("player2")[0].value;
+        startNewGame();
 
         function markXorO() {
-            var mark;
 
             if (gameCount < btns.length) {
-                
+
                 event.currentTarget.disabled = true;
-                //document.getElementById("startNewGame").disabled = true;
 
                 if (isMyTurn) {
                     mark = "X";
                     isMyTurn = !isMyTurn;
-                    displayTurn.innerHTML = `<mark> ${palyerName2}</marK>`
+                    displayTurn.innerHTML = `Next Player: <mark> ${palyerName2}</marK>`
                     event.currentTarget.value = mark;
-                   
+
                     if (checkWin(mark)) {
-                        document.getElementById("gameStatus").innerHTML = `<h2>The winner is ${palyerName1} </h2>`;
-                        for(var i = 0 ; i < btns.length ; i ++)
-                        btns[i].disabled = true;
-                      
+                        displayTurn.innerHTML = "";
+                        document.getElementById("gameStatus").innerHTML = `<h2>GAME OVER <br/> The winner is <b>${palyerName1}</b> </h2>`;
+                        for (var i = 0; i < btns.length; i++)
+                            btns[i].disabled = true;
+                        gameOver();
+
                     }
                 }
                 else {
                     mark = "O";
                     isMyTurn = !isMyTurn;
-                    displayTurn.innerHTML = `<mark> ${palyerName1}</marK>`
+                    displayTurn.innerHTML = `Next Player: <mark> ${palyerName1}</marK>`
                     event.currentTarget.value = mark;
-                   
+
                     if (checkWin(mark)) {
-                        document.getElementById("gameStatus").innerHTML = `<h2>The Winner is ${palyerName2} </h2>`;
-                        for(var i = 0 ; i < btns.length ; i ++)
-                        btns[i].disabled = true;
-                      
+                        displayTurn.innerHTML = "";
+                        document.getElementById("gameStatus").innerHTML = `<h2>GAME OVER <br/> The Winner is <b> ${palyerName2}</b> </h2>`;
+                        for (var i = 0; i < btns.length; i++)
+                            btns[i].disabled = true;
+                        gameOver();
                     }
                 }
-
-
-                /*   
-                 event.currentTarget.parentElement.cellIndex;
-                 console.log(event.currentTarget.parentElement.parentElement.sectionRowIndex);
-                
-               */
-
-
-
                 gameCount++;
 
-                if(gameCount == btns.length)
-                   document.getElementById("gameStatus").innerHTML = "<mark><h2> A Tie  </h2> </mark>";
-                   document.getElementById("startNewGame").disabled = false;
-                   gameCount = 0;
+                if (gameCount == btns.length) {//Tie if game over    
+                    displayTurn.innerHTML = "";
+                    document.getElementById("gameStatus").innerHTML = "GAME OVER : <mark><h2> A Tie  </h2> </mark>";
+                    gameCount = 0;
+                    gameOver();
+                }
             }
+        }
+
+        function gameOver() {
+
+            setTimeout(function () {
+                document.getElementById("game").style.display = "none";
+                document.getElementById("startNewGame").disabled = false;
+                document.getElementById("startNewGame").style.display = "block";
+            }, 2000);
 
 
         }
-
         function checkWin(m) {
 
-            if ((btns[0].value === m) && ( btns[1].value === m ) && ( btns[2].value ===m )) {
+            if ((btns[0].value === m) && (btns[1].value === m) && (btns[2].value === m)) {
                 return true;
-              
+
             }
-            if ((btns[3].value === m) && ( btns[4].value === m ) && ( btns[5].value ===m )) {
-                return true;
-            }
-            if ((btns[6].value === m) && ( btns[7].value === m ) && ( btns[8].value ===m )) {
+            if ((btns[3].value === m) && (btns[4].value === m) && (btns[5].value === m)) {
                 return true;
             }
-            if ((btns[0].value === m) && ( btns[3].value === m ) && ( btns[6].value ===m )) {
+            if ((btns[6].value === m) && (btns[7].value === m) && (btns[8].value === m)) {
                 return true;
             }
-            if ((btns[1].value === m) && ( btns[4].value === m ) && ( btns[7].value ===m )) {
+            if ((btns[0].value === m) && (btns[3].value === m) && (btns[6].value === m)) {
                 return true;
             }
-            if ((btns[2].value === m) && ( btns[5].value === m ) && ( btns[8].value ===m )) {
+            if ((btns[1].value === m) && (btns[4].value === m) && (btns[7].value === m)) {
                 return true;
             }
-            if ((btns[0].value === m) && ( btns[4].value === m ) && ( btns[8].value ===m )) {
+            if ((btns[2].value === m) && (btns[5].value === m) && (btns[8].value === m)) {
                 return true;
             }
-            if ((btns[2].value === m) && ( btns[4].value === m ) && ( btns[6].value ===m )) {
+            if ((btns[0].value === m) && (btns[4].value === m) && (btns[8].value === m)) {
+                return true;
+            }
+            if ((btns[2].value === m) && (btns[4].value === m) && (btns[6].value === m)) {
                 return true;
             }
         }
 
+        function changeToLight() {
+            var lightColors = document.querySelector("#colorStyle");
+            lightColors.removeAttribute("href");
+            lightColors.setAttribute("href", "light.css");
 
+
+        }
+
+        function changeToDark() {
+            var darkColors = document.querySelector("#colorStyle");
+            darkColors.removeAttribute("href");
+            darkColors.setAttribute("href", "dark.css");
+        }
     </script>
 </body>
 

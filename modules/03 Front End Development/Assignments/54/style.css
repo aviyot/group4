@@ -1,0 +1,103 @@
+* {
+    position: relative;
+}
+body {
+    text-align: center;
+    font-size: 2rem;
+    
+}
+
+.row div {
+    text-align: center;
+    align-content: center;
+}
+
+.row {
+    display: table-row;
+
+}
+
+.row > div {
+    display: table-cell;
+     border: 1px solid;
+     vertical-align: middle;
+     border-radius: 50%;
+    
+    
+ 
+}
+.row input {
+    border-radius: 50%;
+    font-size: 100%;
+    height: 100%;
+    width: 100%;
+
+}
+
+.players input{
+text-align: center;
+
+}
+
+
+ #game { 
+    display:flex;
+    border-radius: 5%;
+     margin: auto;
+     text-align: center;
+     overflow: hidden;
+ }
+
+ #theme {
+   
+}
+
+#appName {
+    
+}
+
+.players {
+
+   
+        }
+
+ #gameTable {
+   display: table;
+   width: 100%;
+}
+
+#status {
+   
+}
+
+#startNewGame {
+text-align: center;
+font-size: 2rem;
+border-radius: 30%;
+display: block;
+width: 50%;
+margin:auto;
+}
+
+ #light {
+ 
+    background-color: lightskyblue;
+    color:yellow;
+
+    
+    border-radius: 50%;
+    margin-right: 30%;
+    width: 40%;
+    
+ }
+
+ #dark {
+
+    background-color:black;
+    color:gray;
+ 
+    border-radius: 50%;
+    width: 40%;
+ 
+
+ }
