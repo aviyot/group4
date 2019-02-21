@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tac-Toe game</title>
+    <link rel="stylesheet" id="colorStyle" href="light.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <input type="button" id="startNewGame" value="Start New Game" onclick="startNewGame()">
+
+    <div id="game">
+
+        <div id="theme">
+            <span id="light" onclick="changeToLight()"> Light Colors</span>
+            <span id="dark" onclick="changeToDark()"> Dark Colors</span>
+        </div>
+
+        <div id="appName"> <h2 class="game-name"> TIC TAC GAME </h2> </div>
+
+        <div class="players">
+            <label for="">player X </label>
+            <input type="text" name="player1" id="player1" placeholder="Enter Name" value="AVI"> <br />
+            <label for="">player O </label>
+            <input type="text" name="player2" id="player2" placeholder="Enter Name" value="YOSI">
+        </div>
+
+        <div id="gameTable">
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+      <div id = "status">
+        <div id="displayTurn"> </div>
+        <div id="gameStatus"></div>
+      </div>
+
+    </div>
+
+    <script>
+        var isMyTurn = true;
+        var gameCount = 0;
+        var theTDes = document.querySelectorAll(".row div");
+        var displayTurn = document.getElementById("displayTurn");
+        var btns;
+        var myButtons;
+        var mark;
+
+
+
+        var palyerName1 = document.getElementsByName("player1")[0].value;
+        var palyerName2 = document.getElementsByName("player2")[0].value;
+
+        function startNewGame() {
+
+            document.getElementById("game").style.display = "block";
+            isMyTurn = true;
+            document.getElementById("startNewGame").disabled = true;
+            document.getElementById("gameStatus").innerHTML = "";
+            document.getElementById("startNewGame").style.display = "none"
+
+            gameCount = 0;
+
+            for (var i = 0; i < theTDes.length; i++) {
+                theTDes[i].innerHTML = `<input type="button" 
+                class="btn" value ="" style="" onclick = "markXorO()">`;
+            }
+
+            btns = document.querySelectorAll("#gameTable input[type = button]");
+            if (isMyTurn) {
+
+                displayTurn.innerHTML = `Next Player: <mark> ${palyerName1}</marK>`
+
+            }
+        }
+
+        startNewGame();
+
+        function markXorO() {
+
+            if (gameCount < btns.length) {
+
+                event.currentTarget.disabled = true;
+
+                if (isMyTurn) {
+                    mark = "X";
+                    isMyTurn = !isMyTurn;
+                    displayTurn.innerHTML = `Next Player: <mark> ${palyerName2}</marK>`
+                    event.currentTarget.value = mark;
+
+                    if (checkWin(mark)) {
+                        displayTurn.innerHTML = "";
+                        document.getElementById("gameStatus").innerHTML = `<h2>GAME OVER <br/> The winner is <b>${palyerName1}</b> </h2>`;
+                        for (var i = 0; i < btns.length; i++)
+                            btns[i].disabled = true;
+                        gameOver();
+
+                    }
+                }
+                else {
+                    mark = "O";
+                    isMyTurn = !isMyTurn;
+                    displayTurn.innerHTML = `Next Player: <mark> ${palyerName1}</marK>`
+                    event.currentTarget.value = mark;
+
+                    if (checkWin(mark)) {
+                        displayTurn.innerHTML = "";
+                        document.getElementById("gameStatus").innerHTML = `<h2>GAME OVER <br/> The Winner is <b> ${palyerName2}</b> </h2>`;
+                        for (var i = 0; i < btns.length; i++)
+                            btns[i].disabled = true;
+                        gameOver();
+                    }
+                }
+                gameCount++;
+
+                if (gameCount == btns.length) {//Tie if game over    
+                    displayTurn.innerHTML = "";
+                    document.getElementById("gameStatus").innerHTML = "GAME OVER : <mark><h2> A Tie  </h2> </mark>";
+                    gameCount = 0;
+                    gameOver();
+                }
+            }
+        }
+
+        function gameOver() {
+
+            setTimeout(function () {
+                document.getElementById("game").style.display = "none";
+                document.getElementById("startNewGame").disabled = false;
+                document.getElementById("startNewGame").style.display = "block";
+            }, 2000);
+
+
+        }
+        function checkWin(m) {
+
+            if ((btns[0].value === m) && (btns[1].value === m) && (btns[2].value === m)) {
+                return true;
+
+            }
+            if ((btns[3].value === m) && (btns[4].value === m) && (btns[5].value === m)) {
+                return true;
+            }
+            if ((btns[6].value === m) && (btns[7].value === m) && (btns[8].value === m)) {
+                return true;
+            }
+            if ((btns[0].value === m) && (btns[3].value === m) && (btns[6].value === m)) {
+                return true;
+            }
+            if ((btns[1].value === m) && (btns[4].value === m) && (btns[7].value === m)) {
+                return true;
+            }
+            if ((btns[2].value === m) && (btns[5].value === m) && (btns[8].value === m)) {
+                return true;
+            }
+            if ((btns[0].value === m) && (btns[4].value === m) && (btns[8].value === m)) {
+                return true;
+            }
+            if ((btns[2].value === m) && (btns[4].value === m) && (btns[6].value === m)) {
+                return true;
+            }
+        }
+
+        function changeToLight() {
+            var lightColors = document.querySelector("#colorStyle");
+            lightColors.removeAttribute("href");
+            lightColors.setAttribute("href", "light.css");
+
+
+        }
+
+        function changeToDark() {
+            var darkColors = document.querySelector("#colorStyle");
+            darkColors.removeAttribute("href");
+            darkColors.setAttribute("href", "dark.css");
+        }
+    </script>
+</body>
+
+</html>
