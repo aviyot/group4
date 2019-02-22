@@ -1,16 +1,11 @@
-* {
-    position: relative;
-}
+
 body {
     text-align: center;
-    font-size: 2rem;
+    font-size: 30px;
+    position: relative;
     
 }
 
-.row div {
-    text-align: center;
-    align-content: center;
-}
 
 .row {
     display: table-row;
@@ -19,16 +14,15 @@ body {
 
 .row > div {
     display: table-cell;
-     border: 1px solid;
      vertical-align: middle;
-     border-radius: 50%;
-    
-    
- 
+     text-align: center;
+   
+
+
 }
 .row input {
     border-radius: 50%;
-    font-size: 100%;
+    font-size: 2rem;
     height: 100%;
     width: 100%;
 
@@ -36,6 +30,9 @@ body {
 
 .players input{
 text-align: center;
+font-size: 1.5rem;
+background-color: lightblue;
+border-radius: 40%; 
 
 }
 
@@ -43,31 +40,51 @@ text-align: center;
  #game { 
     display:flex;
     border-radius: 5%;
-     margin: auto;
-     text-align: center;
-     overflow: hidden;
+    text-align: center;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-around;
  }
 
+ #appName {
+    
+} 
+
  #theme {
-   
+display: flex;
+justify-content: space-evenly;
+flex-wrap: wrap;
 }
 
-#appName {
-    
-}
+
+#light {
+    background-color: lightskyblue;
+    color:yellow;
+    border-radius: 50%;
+ }
+
+ #dark {
+    background-color:black;
+    color:gray;
+    border-radius: 50%;
+ }
+
+
 
 .players {
-
+    
    
         }
 
  #gameTable {
    display: table;
-   width: 100%;
+   width: 80%;
+   margin: 0 auto;
+   table-layout: fixed;
 }
 
 #status {
-   
+  
 }
 
 #startNewGame {
@@ -78,26 +95,3 @@ display: block;
 width: 50%;
 margin:auto;
 }
-
- #light {
- 
-    background-color: lightskyblue;
-    color:yellow;
-
-    
-    border-radius: 50%;
-    margin-right: 30%;
-    width: 40%;
-    
- }
-
- #dark {
-
-    background-color:black;
-    color:gray;
- 
-    border-radius: 50%;
-    width: 40%;
- 
-
- }

@@ -1,7 +1,7 @@
 
 body {
 
-background-color: white;
+background-color:dodgerblue;
 
 }
 
@@ -17,6 +17,7 @@ background-color: white;
 
 #game {
     background-color:lightgreen;
+    
 
 
 }
@@ -36,7 +37,6 @@ background-color: white;
         }
 
  #gameTable {
-
 
 }
 
@@ -69,4 +69,9 @@ border-color: white;
 b {
 background-color:blue;
 color: white;
+}
+
+#status {
+    background-color:red;
+    color : black;
 }
