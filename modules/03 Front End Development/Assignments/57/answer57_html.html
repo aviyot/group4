@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function Image(_src){
+        this.src = _src;
+        likeConter = 0 ;
+    }
+
+    Image.prototype.incrementLike = function(){
+       likeConter++;
+    };
+
+    Image.prototype.getLike = function(){
+       return likeConter;
+    };
+    
+    var image1 = new Image("src");
+    image1.incrementLike();
+    console.log(image1.getLike());
+    
+    </script>
+
+
+</body>
+</html>
