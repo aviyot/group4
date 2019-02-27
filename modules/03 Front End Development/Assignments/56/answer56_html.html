@@ -7,45 +7,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Instush</title>
     <style>
+        *  {
+            box-sizing: border-box;
+        }
         .image_thumbnails {
-            height: 20%;
+            height: 12vh;
             display: flex;
             justify-content: space-around;
             flex-direction: row;
+            overflow: auto;
 
         }
 
         .img-tumbnail {
-            width: 200px;
-            height: 200px;
-            padding: 10px;
-
-
+            width: auto;
+            height: 10vh;
+            padding: 0.2vw;
         }
 
 
-        .selected-img {}
+        .selected-img {
+            height: 80vh;
+            margin: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
 
 
         .img-center {
             width: auto;
-            height: 80vh;
+            height: 78vh;
+            padding: 1rem;
 
         }
 
         .big-pic {
             height: 80%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            background-color: black;
+            
+          
+           
         }
 
         .arrows {
-            font-size: 10rem;
-            background-color: blue;
-            color:white;
-            margin: 1rem;
-            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 4vw;
+            width: 5vw;
+            height: 70vh;
+            vertical-align: middle;
+            color: green;
+            
         }
     </style>
 </head>
@@ -54,13 +72,13 @@
     <div>
         <div class="big-pic">
             <div class="left-arrow arrows" onclick="showPreImg()">
-                &larr;
+                &lArr;
             </div>
             <div class="selected-img">
 
             </div>
             <div class="right-arrows arrows" onclick="showNextImg()">
-                &rarr;
+                &rArr;
             </div>
         </div>
         <div class="image_thumbnails">
@@ -124,6 +142,11 @@
                 selectedImgIndex++;
                 loadPic();
             }
+            else {
+                selectedImgIndex =  0;
+                loadPic();
+            }
+
 
         }
         function showPreImg() {
@@ -131,6 +154,10 @@
 
             if (selectedImgIndex > 0) {
                 selectedImgIndex--;
+                loadPic();
+            }
+            else {
+                selectedImgIndex =  imgSrc.length - 1;
                 loadPic();
             }
 
