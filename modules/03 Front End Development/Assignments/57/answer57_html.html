@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instush</title>
+    <style>
+        .like {
+         align-self: center;
+         padding-left: 60px;
+         font-weight: bold;
+           
+        
+        }
+
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .img-tumbnail {
+            width:200px;
+            height:200px ;
+            margin-top: 20px; 
+         
+        }
+         img:hover {
+            box-shadow: 10px 10px grey;
+         }
+
+
+        .like-counter {
+           background-color:black;
+           color: white;
+          padding: 3px;
+           font-size: x-large;
+           align-self: center;
+          
+          
+        }
+
+        .like-area {
+            display: flex;
+            background-color: gray;
+           
+            overflow: hidden;
+            justify-content: space-between;
+            align-content: stretch;
+
+        }
+        .selected-img {
+            display: none;
+           
+         
+        }
+        .make-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            height: 100%;
+            z-index: 999;
+            position: absolute;
+        }
+
+        .make-blur {
+            filter: blur(8px);
+        }
+
+    .img-center {
+            width:auto;
+            height:80%;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class = "selected-img">
+
+    </div>
+    <div class="images">
+
+    </div>
+    
+
+    <script>
+        var images = [];
+        var imagesEl = document.querySelector(".images");
+
+        function Image(_src) {
+            this.src = _src;
+            this.likeConter = 0;
+
+
+        }
+
+
+        Image.prototype.incrementLike = function () {
+            this.likeConter++;
+        };
+
+        Image.prototype.getLike = function () {
+            return this.likeConter;
+        };
+        var imgSrc = ["https://content.linkedin.com/content/dam/me/learning/blog/2016/september/CSS.jpg",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      "https://cdn-images-1.medium.com/max/1600/1*ZPlE0Td0GCO2mt3Ivrmp5g.gif",
+                      ];
+
+
+
+        for (var i = 0; i < imgSrc.length; i++) {
+
+            images.push(new Image(imgSrc[i]));
+        }
+
+
+        function test(index) {
+            images[index].incrementLike();
+            document.querySelectorAll(".like-counter")[index].innerHTML = images[index].getLike();
+        }
+
+        function makeBlur(ev){
+        var selectedImg = document.querySelector(".selected-img");
+        selectedImg.innerHTML = ev.currentTarget.outerHTML;
+        selectedImg.classList.add("make-center");
+        
+       imagesEl.classList.add("make-blur");
+       document.querySelector(".selected-img img").classList.remove("img-tumbnail");
+       document.querySelector(".selected-img img").classList.add("img-center");
+      
+
+        }
+
+        for (let i = 0; i < images.length; i++) {
+            imagesEl.innerHTML += `<div class ="img" ">
+                                   <img src= ${images[i].src}  class = "img-tumbnail" onclick ="makeBlur(event)"/> 
+                                   <div class = "like-area">
+                                       <span class = "like" onclick = "test(${i})"> LIKE </span>
+                                       <span class = "like-counter"> ${images[i].getLike()} </span> 
+                                   </div>
+                               </div>`
+          
+        }
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
