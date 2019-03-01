@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <script>
 
 console.log("******************************");
 //Start Answer29
@@ -192,7 +182,3 @@ console.log(v_num + " " + v_ch + "is Same: " + ob.isSame(v_num,v_ch));
 console.log("******************************");
 
 //End Answer 27
-
-    </script>
-</body>
-</html>
