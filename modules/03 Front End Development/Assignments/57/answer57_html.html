@@ -10,14 +10,19 @@
         
         .like {
          align-self: center;
-         padding-left: 60px;
-         font-weight: bold;
-         transition: transform 1s;
+       
+         font-size: large;
+         transition: all 0.5s;
+       
+      
+        
         }
 
 
         .like:hover {
-            transform: scale(1.5);
+           
+            
+            font-weight: bold;
         }
 
         .images {
@@ -34,9 +39,10 @@
          
         }
         .img-tumbnail:hover {
-            box-shadow: 10px 10px 5px #aaaaaa;
+         
        
-            transform: scale(1.2)
+           transform: scale(1.2);
+           
             
          }
 
@@ -54,7 +60,6 @@
         .like-area {
             display: flex;
             background-color: gray;
-           
             overflow: hidden;
             justify-content: space-between;
             align-content: stretch;
@@ -90,13 +95,14 @@
 
     .img-center {
             width:auto;
-            height:80%;
+            height:90%;
+            border: 5px solid black;
             
         }
     </style>
 </head>
 
-<body >
+<body onbeforeunload="savelike()" >
     <div class = "selected-img">
      
 
@@ -139,7 +145,7 @@
          
         ];
 
-       
+        //localStorage.removeItem('like');
         var imagesLocal = JSON.parse(localStorage.getItem('like'));
         
         if( imagesLocal == null) {
@@ -148,7 +154,7 @@
 
             images.push(new Image(imgSrc[i]));
         }
-        localStorage.setItem("like",JSON.stringify(images));
+      //  localStorage.setItem("like",JSON.stringify(images));
         }
         else {
             for(var i = 0 ; i < imagesLocal.length ;i++) {
@@ -164,17 +170,17 @@
            imagesEl.innerHTML += `<div class ="img" ">
                                   <img src= ${images[i].src}  class = "img-tumbnail" onclick ="makeBlur(event)"/> 
                                   <div class = "like-area">
-                                      <span class = "like" onclick = "test(${i})"> LIKE </span>
+                                      <span class = "like" onclick = "incrementLike(${i})"> LIKE </span>
                                       <span class = "like-counter"> ${images[i].getLike()} </span> 
                                   </div>
                               </div>`
          
        }
 
-        function test(index) {
+        function incrementLike(index) {
             images[index].incrementLike();
             document.querySelectorAll(".like-counter")[index].innerHTML = images[index].getLike();
-            savelike();
+           // savelike();
         }
 
         function makeBlur(ev){
