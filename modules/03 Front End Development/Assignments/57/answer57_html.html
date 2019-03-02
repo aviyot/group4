@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Instush</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-size: 2.5vw;
         
+        }
         .like {
          align-self: center;
        
-         font-size: large;
+         font-size: 1rem;
          transition: all 0.5s;
        
       
@@ -29,12 +33,18 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            align-items: flex-end;
         }
 
+        .img-warper {
+            width: calc(100%/3);
+            padding:  0.5rem;
+        }
         .img-tumbnail {
-            width:200px;
-            height:200px ;
-            margin-top: 20px;
+            width: 100%;
+            height: auto;
+          
+          
             transition: all 0.3s;
          
         }
@@ -50,19 +60,17 @@
         .like-counter {
            background-color:black;
            color: white;
-          padding: 3px;
-           font-size: x-large;
+           font-size: 0.8rem;
            align-self: center;
-          
-          
         }
 
         .like-area {
             display: flex;
             background-color: gray;
-            overflow: hidden;
+           
             justify-content: space-between;
             align-content: stretch;
+            height:1rem;
 
         }
         .selected-img {
@@ -90,13 +98,13 @@
         }
 
         .make-blur {
-            filter: blur(8px);
+            filter: blur(0.5rem);
         }
 
     .img-center {
             width:auto;
             height:90%;
-            border: 5px solid black;
+            border: 0.5rem solid black;
             
         }
     </style>
@@ -167,7 +175,7 @@
 
         for (let i = 0; i < images.length; i++) {
            
-           imagesEl.innerHTML += `<div class ="img" ">
+           imagesEl.innerHTML += `<div class ="img-warper" ">
                                   <img src= ${images[i].src}  class = "img-tumbnail" onclick ="makeBlur(event)"/> 
                                   <div class = "like-area">
                                       <span class = "like" onclick = "incrementLike(${i})"> LIKE </span>
