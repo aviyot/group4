@@ -7,12 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Instush</title>
     <style>
+        
         .like {
          align-self: center;
          padding-left: 60px;
          font-weight: bold;
-           
-        
+         transition: transform 1s;
+        }
+
+
+        .like:hover {
+            transform: scale(1.5);
         }
 
         .images {
@@ -24,11 +29,15 @@
         .img-tumbnail {
             width:200px;
             height:200px ;
-            margin-top: 20px; 
+            margin-top: 20px;
+            transition: all 0.3s;
          
         }
-         img:hover {
-            box-shadow: 10px 10px grey;
+        .img-tumbnail:hover {
+            box-shadow: 10px 10px 5px #aaaaaa;
+       
+            transform: scale(1.2)
+            
          }
 
 
@@ -53,12 +62,17 @@
         }
         .selected-img {
             display: none;
+          
+            }
+           
+
+
             
             
 
            
          
-        }
+        
         .make-center {
             display: flex;
             justify-content: center;
@@ -67,6 +81,7 @@
             height: 100%;
             z-index: 999;
             position: absolute;
+           
         }
 
         .make-blur {
