@@ -1,0 +1,18 @@
+<h1> {{title}}</h1>
+
+<ul>
+  <h2> foods:</h2>
+  <li *ngFor = "let food of foods ; let i = index"> 
+      My #{{i}} choice is {{food}}
+  </li>
+
+  <h2>beverages:</h2>
+  <li *ngFor ="let beverage of beverages ; let i = index">
+      My #{{i}} choice is {{beverage}}
+  </li>
+
+  <h2> colors :</h2>
+  <li *ngFor ="let color of colors  ; let i = index">
+      My #{{i}} choice is {{color}}
+  </li>
+</ul>
