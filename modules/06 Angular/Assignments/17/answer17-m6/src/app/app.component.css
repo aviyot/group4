@@ -1,0 +1,10 @@
+.header {
+    width: 90%;
+    margin: 0 auto;
+    background-color: bisque;
+}
+.header li{
+    display: inline-block;
+    width: 33%;
+
+}
