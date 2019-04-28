@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Img } from "../../modules/img";
+import { IntushServicesService } from 'src/app/intush-services.service';
 
 @Component({
   selector: 'app-image',
@@ -13,7 +14,7 @@ export class ImageComponent implements OnInit {
   @Output() showImgEvent = new EventEmitter<string>();
   @Output() incressLikeEvent = new EventEmitter();
 
-  constructor() {
+  constructor(private intushServicesService: IntushServicesService) {
   }
 
   ngOnInit() {

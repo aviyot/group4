@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IntushServicesService } from 'src/app/intush-services.service';
 
 @Component({
   selector: 'app-top-pics',
@@ -7,15 +8,16 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TopPicsComponent implements OnInit {
 
-  @Input() topPicSrcs: string[];
+  topPicSrcs: string[];
   @Output() showImgEvent = new EventEmitter<string>();
   toggle:boolean;
 
-  constructor() { 
+  constructor(private intushServicesService: IntushServicesService) {
     this.toggle = false;
   }
 
   ngOnInit() {
+    this.topPicSrcs = this.intushServicesService.topPicSrcs
   }
 
   toggleUl() {
