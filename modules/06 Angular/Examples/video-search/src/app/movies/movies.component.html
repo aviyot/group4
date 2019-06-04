@@ -3,7 +3,7 @@
   <button type="submit">Search</button>
 </form>
 <div [hidden]="page-1 === 0">
-    Page {{page-1}} from {{NumPages}} Pages;
+    <span>Page {{page-1}} from {{NumPages}} Pages </span>
     <button *ngIf="movies.length > 0" (click)="loadMovies()" [disabled]="(page-1) === NumPages">
         Load More...
       </button>
@@ -20,4 +20,4 @@
 
 </div>
 
-<app-favorites></app-favorites>
+

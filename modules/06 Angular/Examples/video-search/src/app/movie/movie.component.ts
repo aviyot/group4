@@ -37,6 +37,7 @@ export class MovieComponent implements OnInit {
     private favoritesService: FavoritesService,
     private actorService: ActorService
     ) {
+
     this.endpoint = rootUrl;
     this.movieDetails = [];
     this.actors = [];
@@ -55,7 +56,10 @@ export class MovieComponent implements OnInit {
 
   setMovie(id: string) {
     this.movieService.loadMovie(id)
-      .then(data => this.movie = data)
+      .then(data => {
+
+        this.movie = data;
+      })
   }
 
   showDetails(id: string) {
