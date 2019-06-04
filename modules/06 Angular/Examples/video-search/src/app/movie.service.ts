@@ -17,13 +17,18 @@ export class MovieService {
   loadMovie(id: string): Promise<Movie> {
     const url = `${this.endpoint}&i=${id}`;
     this.loggerService.log(`fetching movie from url: ${url}`);
-    return fetch(url).then(response => response.json())
+    console.log(fetch(url).then(response => response.json()));
+    return fetch(url).then(response => response.json());
   }
 
-  loadMovies(page: number, search: string): Promise<Movie> {
+  loadMovies(page: number, search: string): any{
     const url = `${this.endpoint}&page=${page}&s=${search}`;
     this.loggerService.log(`fetching movies from url: ${url}`);
     return fetch(url)
-    .then( response => response.json() )
+    .then( response => response.json())
+    .then( data => {
+       console.log(data);
+       return data;
+    });
   }
 }

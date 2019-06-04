@@ -2,16 +2,22 @@
   <input type="text" placeholder="Enter movie name..." minlength="3" #query />
   <button type="submit">Search</button>
 </form>
+<div [hidden]="page-1 === 0">
+    Page {{page-1}} from {{NumPages}} Pages;
+    <button *ngIf="movies.length > 0" (click)="loadMovies()" [disabled]="(page-1) === NumPages">
+        Load More...
+      </button>
 
+    </div>
 <div id="movies">
+
+
   <div id="movie-details" *ngFor="let currentMovie of movies">
     <!-- <app-movie [movie]="currentMovie" (favoritesEventAlias)="onFavoritesChange($event)"></app-movie> -->
     <app-movie [movie]="currentMovie"></app-movie>
   </div>
 
-  <button *ngIf="movies.length > 0" (click)="loadMovies()" [disabled]="!hasMore">
-    Load More...
-  </button>
+
 </div>
 
 <app-favorites></app-favorites>

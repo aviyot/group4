@@ -12,11 +12,10 @@ export class FavoritesService {
   }
 
   toggleFavorite(movie: Movie) {
-    if (this.favorites.includes(movie)){
+    if (this.favorites.includes(movie)) {
       const movieIndex = this.favorites.indexOf(movie);
       this.favorites.splice(movieIndex, 1);
-    }
-    else {
+    } else {
       this.favorites.push(movie);
     }
   }
