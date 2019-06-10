@@ -1,0 +1,21 @@
+<div>
+  <ol >
+    <li class="book" *ngFor="let book of books;index as i"  (click)="toogleDetails(i)">
+      <div>
+        Title: <span> {{ book.volumeInfo.title }}</span>
+      </div>
+      <div>
+        Authors: <span>{{ book.volumeInfo.authors }}</span>
+      </div>
+      <div><a [href]="book.volumeInfo.previewLink"> Preview Link </a></div>
+
+      <div class="details" *ngIf="showDetails && i== selectedIndex">
+        <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="thumbnail"/>
+        <div>Publisher: <span> {{book.volumeInfo.publisher}}</span> </div>
+        <div>Published Date  : <span>{{book.volumeInfo.publishedDate}}</span> </div>
+        <div>Description: <span>{{book.volumeInfo.description}}</span> </div>
+
+      </div>
+    </li>
+  </ol>
+</div>

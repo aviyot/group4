@@ -1,0 +1,14 @@
+.details {
+  background-color: lightgray;
+}
+
+.book:hover{
+  cursor: row-resize;
+}
+ span {
+   background-color: yellow;
+ }
+
+ .book {
+   padding: 5px;
+ }
