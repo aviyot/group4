@@ -6,13 +6,11 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./books-view.component.css"]
 })
 export class BooksViewComponent implements OnInit {
-  @Input() books;
+  @Input() book;
   showDetails = false;
-  selectedIndex = -1;
   constructor() {}
-  toogleDetails(selectedIndex){
+  toogleDetails(){
     this.showDetails = !this.showDetails;
-    this.selectedIndex = selectedIndex;
   }
   ngOnInit() {}
 }

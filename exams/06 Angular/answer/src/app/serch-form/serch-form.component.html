@@ -2,17 +2,30 @@
   <form (ngSubmit)="onSubmit(serchForm)" #serchForm="ngForm">
     <label for="serch">Enter book name</label>
     <input
-      type = "text"
-      name = "serch"
-      id = "serch"
-      [(ngModel)] = "serch"
+      type="text"
+      name="serch"
+      id="serch"
+      [(ngModel)]="serch"
       required
-      minlength = "3"
+      minlength="3"
     />
-    <div *ngIf = "serchForm.invalid && serchForm.touched" > search term Must to be at least 3 characters long</div>
-    <input type = "submit" value = "Serch Book"  [disabled]="serchForm.invalid"/>
+    <div *ngIf="serchForm.invalid && serchForm.touched">
+      search term Must to be at least 3 characters long
+    </div>
+    <input type="submit" value="Serch Book" [disabled]="serchForm.invalid" />
   </form>
 </div>
-
-<app-books-view [books]="books"></app-books-view>
-<button *ngIf="index > 0" [disabled]= "index >= (totalItems/10)" (click)="loadMore()">Load More</button>
+<div>
+  <ol>
+    <li *ngFor="let book of books">
+      <app-books-view [book]="book"></app-books-view>
+    </li>
+  </ol>
+</div>
+<button
+  *ngIf="index > 0"
+  [disabled]="index >= totalItems / 10"
+  (click)="loadMore()"
+>
+  Load More
+</button>
