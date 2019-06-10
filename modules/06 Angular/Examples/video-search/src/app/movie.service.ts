@@ -9,7 +9,7 @@ import { Movie } from './movie.model';
 export class MovieService {
   endpoint: string;
   constructor(
-    private loggerService:LoggerService
+    private loggerService: LoggerService
   ) {
     this.endpoint = rootUrl;
    }
@@ -21,7 +21,7 @@ export class MovieService {
     return fetch(url).then(response => response.json());
   }
 
-  loadMovies(page: number, search: string): any{
+  loadMovies(page: number, search: string): any {
     const url = `${this.endpoint}&page=${page}&s=${search}`;
     this.loggerService.log(`fetching movies from url: ${url}`);
     return fetch(url)

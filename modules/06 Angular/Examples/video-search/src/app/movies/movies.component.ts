@@ -1,19 +1,19 @@
-import { Component, ViewChild } from "@angular/core";
-import { Movie } from "../movie.model";
-import { searchUrl } from "../endpoint";
-import { MovieService } from "../movie.service";
-import { LoggerService } from "../logger.service";
-import { logTypes } from "../logTypes.model";
-import { FavoritesComponent } from "../favorites/favorites.component";
+import { Component, ViewChild } from '@angular/core';
+import { Movie } from '../movie.model';
+import { searchUrl } from '../endpoint';
+import { MovieService } from '../movie.service';
+import { LoggerService } from '../logger.service';
+import { logTypes } from '../logTypes.model';
+import { FavoritesComponent } from '../favorites/favorites.component';
 
 @Component({
-  selector: "app-movies",
-  templateUrl: "./movies.component.html",
-  styleUrls: ["./movies.component.css"]
+  selector: 'app-movies',
+  templateUrl: './movies.component.html',
+  styleUrls: ['./movies.component.css']
   // providers: [LoggerService]
 })
 export class MoviesComponent {
-  @ViewChild("query") myQuery;
+  @ViewChild('query') myQuery;
   @ViewChild(FavoritesComponent) favoritesComponent: FavoritesComponent;
 
   // 1. variables declarations
@@ -23,7 +23,7 @@ export class MoviesComponent {
   page: number;
   search: string;
   favorites: Movie[];
-  NumPages:number;
+  NumPages: number;
 
   // 2. default values
   constructor(
@@ -31,7 +31,7 @@ export class MoviesComponent {
     private movieService: MovieService
   ) {
     this.endpoint = searchUrl;
-    this.search = "";
+    this.search = '';
     this.initDefaultValues();
     this.favorites = [];
     // this.loggerService.setLogType(logTypes.INFO);
@@ -40,18 +40,18 @@ export class MoviesComponent {
   // 3. logic
 
   initDefaultValues() {
-    this.loggerService.log("Initiating default value");
+    this.loggerService.log('Initiating default value');
     this.movies = [];
     this.page = 1;
     this.hasMore = false;
   }
 
   searchMovie(e: Event, input: HTMLInputElement) {
-    this.loggerService.log("myQuery " + this.myQuery.nativeElement.value);
+    this.loggerService.log('myQuery ' + this.myQuery.nativeElement.value);
     this.loggerService.log(
-      "Searching movie: event " +
+      'Searching movie: event ' +
         JSON.stringify(e) +
-        " input" +
+        ' input' +
         JSON.stringify(input)
     );
     e.preventDefault();
@@ -66,12 +66,12 @@ export class MoviesComponent {
     // this.loggerService.log(`fetching movies from url: ${url}`);
     // fetch(url)
     // .then( response => response.json() )
-    const ResultPerPage =  10;;
+    const ResultPerPage =  10;
     this.movieService.loadMovies(this.page, this.search).then(serchResult => {
       if (serchResult.Search) {
-        this.NumPages = Math.ceil(serchResult.totalResults/ResultPerPage);
+        this.NumPages = Math.ceil(serchResult.totalResults / ResultPerPage);
         this.setMovies(serchResult.Search);
-      } else this.disableLoadMore();
+      } else { this.disableLoadMore(); }
     });
   }
 
