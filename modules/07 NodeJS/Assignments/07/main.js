@@ -28,7 +28,6 @@ app.get("/", (request, response) => {
     try {
       const promiseZip = promisify(zip);
       const result = await promiseZip(fileName);
-
       console.log("Result", result.message);
       response.json("Sucsess to backup");
     } catch (ex) {
