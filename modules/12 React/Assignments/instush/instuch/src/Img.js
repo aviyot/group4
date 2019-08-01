@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./components/Button";
 import "./Img.css";
 
 class Img extends React.Component {
@@ -17,7 +18,7 @@ class Img extends React.Component {
     this.state = {
       imgIndex: this.imgs.length - 1
     };
-    this.startCountDown();
+    //this.startCountDown();
   }
 
   startCountDown() {
@@ -36,7 +37,14 @@ class Img extends React.Component {
   render() {
     return (
       <div>
-        <img className="Img" src={this.imgs[this.state.imgIndex]} />
+        {this.imgs.map(img => (
+          <>
+            <img className="Img" src={img} />
+            <Button label="like" class="fa fa-thumbs-up" />
+            <i class="fa fa-thumbs-up" />
+            <Button label="DisLike" />
+          </>
+        ))}
       </div>
     );
   }
